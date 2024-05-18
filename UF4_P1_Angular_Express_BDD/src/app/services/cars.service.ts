@@ -50,9 +50,9 @@ export class CarsService {
       headers: headers,
       body: { seriesNumber: seriesNumber }
     }).subscribe(response => {
-      console.log('Car deleted', response);
+      console.log('Coche eliminado', response);
     }, error => {
-      console.error('Error deleting car', error);
+      console.error('Error al eliminar un coche', error);
     });
   }
 
