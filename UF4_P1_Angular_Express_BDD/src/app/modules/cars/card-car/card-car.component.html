@@ -1,0 +1,50 @@
+@if(car){
+    <div class="card-container">
+      <div class="card" [style.background-image]="'url(' + car.image + ')'">
+        <div class="front-content">
+          <p>{{ car.model }}</p>
+        </div>
+        <div class="content">
+          <div class="carInfo">
+            <p class="heading">{{ car.model }}</p>
+            <div class="carSpec">
+              <div class="carSpecCont1">
+                <div class="contData">
+                  <h4>Potencia Máxima </h4>
+                  <p>{{ car.cv }} CV</p>
+                </div>
+                <div class="separator"></div>
+                <div class="contData">
+                  <h4>Aceleración <br> 0 - 100 km/h</h4>
+                  <p>{{ car.accelerationTime }} s</p>
+                </div>
+                <div class="separator"></div>
+                <div class="contData">
+                  <h4>Velocidad Máxima</h4>
+                  <p>{{ car.maxSpeed }} km/h</p>
+                </div>
+              </div>
+              <div class="carSpecCont2">
+                @if (car.available) {
+                  <p class="available">Disponible</p>
+                }@else {
+                  <p class="notAvailable">No disponible</p>
+                }
+                <p>
+                  Desde
+                  {{
+                    car.price.toLocaleString("es-ES", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })
+                  }}
+                  €
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+}
+    

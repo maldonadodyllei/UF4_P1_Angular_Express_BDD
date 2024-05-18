@@ -1,0 +1,35 @@
+<div class="bodyCars">
+  <div class="contImgH">
+    <img
+      src="https://www.astonmartin.com/-/media/new-model-page-design---models/all_models_imagery-for-new-component/all_model_hero_banner_desktop_v2.jpg?mw=1920&rev=aec5bb7b1c6b44e8a63ca26db21d9838&extension=webp&hash=9E75CC99A514EF0A4A4239B8D229598A"
+      alt="models"
+    />
+    <div class="overlay">
+      <h1>Modelos</h1>
+    </div>
+  </div>
+  <section id="coupe">
+    <h3 [class.areCategory]="areCoupe">Coupé</h3>
+    <div class="cardsModels">
+      @for(car of carList; track car) { @if(car.category == 'Coupé'){
+      <app-card-car [car]="car"></app-card-car>
+      } }
+    </div>
+  </section>
+  <section id="cabriolet">
+    <h3 [class.areCategory]="areCabrio">Cabriolet</h3>
+    <div class="cardsModels">
+      @for(car of carList; track car){ @if(car.category == 'Cabriolet'){
+      <app-card-car [car]="car"></app-card-car>
+      } }
+    </div>
+  </section>
+  <section id="suv">
+    <h3 [class.areCategory]="areSuv">SUV</h3>
+    <div class="cardsModels">
+      @for(car of carList; track car){ @if(car.category == 'SUV'){
+      <app-card-car [car]="car"></app-card-car>
+      } }
+    </div>
+  </section>
+</div>

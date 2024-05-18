@@ -1,0 +1,167 @@
+<div class="bodyA">
+  <div class="contImgH">
+    <img
+      src="https://www.astonmartin.com/-/media/brand-stories/jpg-mediumdbx707--vantage-f1-edition--nyc-imagery.jpg?mw=1920&rev=6b2a4344cae747929f6da25add46c6d2&extension=webp&hash=2DF6E969C6A6896C7AE3AEA7DC7302A2"
+      alt="amr24"
+    />
+    <div class="overlay">
+      <h1>Añadir nuevo modelo</h1>
+    </div>
+  </div>
+  <form [formGroup]="CarForm" (ngSubmit)="onSubmit()" class="formContainer">
+    <div class="contInput">
+      <div class="contLabel-Input">
+        <label class="label-input" for="seriesNumber">N° Serie <span>*</span></label>
+        <input
+          type="number"
+          placeholder="Numero de serie"
+          name="seriesNumber"
+          formControlName="seriesNumber"
+          min="0"
+          [(ngModel)]="nmbSeries"
+          (input)="verifySeries()"
+        />
+      </div>
+      @if(CarForm.get('seriesNumber')?.touched &&
+      CarForm.get('seriesNumber')?.hasError('required')){
+      <p class="error">n° de serie es obligatorio</p>
+      }@else if (CarForm.get('seriesNumber')?.touched &&
+      CarForm.get('seriesNumber')!.hasError('min')){
+      <p class="warning">n° de serie es inferior a 10 digitos</p>
+      }@else if (CarForm.get('seriesNumber')?.dirty &&
+      CarForm.get('seriesNumber')!.hasError('max')) {
+      <p class="warning">n° de serie es superior a 10 digitos</p>
+      }
+    </div>
+    <div class="contInput">
+      <div class="contLabel-Input">
+        <label class="label-input" for="seriesNumber">Modelo <span>*</span></label>
+      <input
+        type="text"
+        placeholder="Modelo"
+        name="model"
+        formControlName="model"
+        [(ngModel)]="nmModel"
+      />
+    </div>
+      @if(CarForm.get('model')?.dirty){ @if(verifyModel()){
+      <p class="error">modelo ya existe</p>
+      } } @if(CarForm.get('model')?.touched &&
+      CarForm.get('model')?.hasError('required')){
+      <p class="error">modelo es obligatorio</p>
+      }@else if (CarForm.get('model')?.touched &&
+      CarForm.get('model')!.value.length < 3){
+      <p class="error">modelo debe tener un minimo de 3 caracteres</p>
+      }@else if (CarForm.get('model')?.dirty &&
+      CarForm.get('model')!.value.length > 30) {
+      <p class="error">modelo no puede ser superior a 30 caracteres</p>
+      }
+    </div>
+    <div class="contInput">
+      <div class="contLabel-Input">
+        <label class="label-input" for="seriesNumber">Categoria <span>*</span></label>
+      <select name="category" id="category" formControlName="category">
+        <option selected disabled value="" >Selecciona una categoria</option>
+        <option value="Coupé">Coupé</option>
+        <option value="Cabriolet">Cabriolet</option>
+        <option value="SUV">SUV</option>
+      </select>
+      </div>
+      @if(CarForm.get('category')?.touched &&
+      CarForm.get('category')?.hasError('required')){
+      <p class="error">categoria es obligatorio</p>
+      }
+    </div>
+    <div class="contInput">
+      <div class="contLabel-Input">
+        <label class="label-input" for="seriesNumber">Caballos de fuerza <span>*</span></label>
+      <input
+        type="number"
+        placeholder="Caballos de fuerza"
+        name="cv"
+        formControlName="cv"
+        min="0"
+      />
+      </div>
+      @if(CarForm.get('cv')?.touched &&
+      CarForm.get('cv')?.hasError('required')){
+      <p class="error">n° de caballos de fuerza es obligatorio</p>
+      }@else if (CarForm.get('cv')?.touched &&
+      CarForm.get('cv')!.hasError('min')){
+      <p class="error">
+        n° de caballos de fuerza debe tener un minimo de 100CV
+      </p>
+      }@else if (CarForm.get('cv')?.dirty && CarForm.get('cv')!.hasError('max'))
+      {
+      <p class="error">máximo de n° de caballos de fuerza es 5000CV</p>
+      }
+    </div>
+    <div class="contInput">
+      <div class="contLabel-Input">
+        <label class="label-input" for="seriesNumber">Velocidad máxima <span>*</span></label>
+      <input
+        type="number"
+        placeholder="Velocidad máxima"
+        name="maxSpeed"
+        formControlName="maxSpeed"
+        min="0"
+      />
+      </div>
+      @if(CarForm.get('maxSpeed')?.touched &&
+      CarForm.get('maxSpeed')?.hasError('required')){
+      <p class="error">velocidad máxima es obligatorio</p>
+      }@else if (CarForm.get('maxSpeed')?.touched &&
+      CarForm.get('maxSpeed')!.hasError('min')){
+      <p class="error">velocidad máxima debe tener un minimo de 10 km/h</p>
+      }@else if (CarForm.get('maxSpeed')?.dirty &&
+      CarForm.get('maxSpeed')!.hasError('max')) {
+      <p class="error">limite de la velocidad máxima es de 800 km/h</p>
+      }
+    </div>
+    <div class="contInput">
+      <div class="contLabel-Input">
+        <label class="label-input" for="seriesNumber">Aceleración 0-100 km/h <span>*</span></label>
+      <input
+        type="number"
+        placeholder="Aceleración de 0 a 100 km/h"
+        name="accelerationTime"
+        formControlName="accelerationTime"
+        min="0"
+      />
+      </div>
+      @if(CarForm.get('accelerationTime')?.touched &&
+      CarForm.get('accelerationTime')?.hasError('required')){
+      <p class="error">aceleración es obligatorio</p>
+      }@else if (CarForm.get('accelerationTime')?.touched &&
+      CarForm.get('accelerationTime')!.hasError('min')){
+      <p class="error">aceleración debe de ser de un minimo de 0.1 seg</p>
+      }
+    </div>
+    <div class="contInput">
+      <div class="contLabel-Input">
+        <label class="label-input" for="seriesNumber">Precio <span>*</span></label>
+      <input
+        type="number"
+        placeholder="Precio"
+        name="price"
+        formControlName="price"
+        min="0"
+      />
+      </div>
+      @if(CarForm.get('price')?.touched &&
+      CarForm.get('price')?.hasError('required')){
+      <p class="error">precio es obligatorio</p>
+      }@else if (CarForm.get('price')?.touched &&
+      CarForm.get('price')!.hasError('min')){
+      <p class="error">precio debe de ser como minimo de 1€</p>
+      }
+    </div>
+    <div class="contInput">
+      <label for="available" class="cyberpunk-checkbox-label">Disponibilidad
+      <input type="checkbox" name="available" formControlName="available" class="cyberpunk-checkbox"/></label>
+    </div>
+    <button type="submit" [disabled]="CarForm.invalid" class="btnSubmit">
+      Guardar
+    </button>
+  </form>
+</div>

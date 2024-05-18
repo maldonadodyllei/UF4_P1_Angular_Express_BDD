@@ -1,0 +1,89 @@
+.containerF{
+    height: 775px;
+    display: flex;
+    flex-direction: column;
+    padding: 104px 48px 48px;
+}
+
+.containerF h5{
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 40px;
+}
+
+hr{
+    border-color: black;
+    width: 100%;
+    margin-bottom: 64px;
+}
+
+
+.contLinks{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 88px;
+    margin-bottom: 64px;
+}
+
+.footer-accordion{
+    display: contents;
+}
+
+.colLinks{
+    display: contents;
+}
+
+.colLinks ul{
+    padding-bottom: 0;
+    flex-basis: 130px;
+    flex-shrink: 0;
+    list-style: none;
+}
+
+.a-dsg{
+    display: inline-block;
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: normal;
+    padding: 8px 0;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: .3s ease-in-out
+}
+
+.a-dsg:hover{
+    text-decoration: underline;
+    text-decoration-color: #00665e ;
+}
+
+.footer-dealer{
+    width: 40%;
+}
+
+.smallP{
+    width: 50%;
+    font-size: 9px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.777;
+    letter-spacing: .55px;
+}
+
+.footer-lastSec{
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    gap: 16px;
+    flex: 1;
+}
+
+.nameBrand{
+    cursor: inherit;
+}
+.nameBrand:hover{
+    text-decoration: none;
+}
