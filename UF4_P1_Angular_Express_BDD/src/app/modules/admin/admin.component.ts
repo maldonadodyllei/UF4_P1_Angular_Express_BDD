@@ -16,9 +16,11 @@ import { CarsService } from '../../services/cars.service';
   styleUrl: './admin.component.css',
 })
 export class AdminComponent {
+  CarList: any = [];
   CarForm!: FormGroup;
   nmModel: string = '';
   nmbSeries!: number;
+  carSeriesExist: boolean = false;
   imagesAM = [
     {
       model: 'DBX707',
@@ -57,6 +59,8 @@ export class AdminComponent {
   constructor(private fb: FormBuilder, private carsService: CarsService) {}
 
   ngOnInit(): void {
+    this.getCars();
+
     this.CarForm = this.fb.group({
       seriesNumber: new FormControl('', [
         Validators.required,
@@ -99,22 +103,18 @@ export class AdminComponent {
 
   onSubmit(): void {
     if (this.CarForm.valid) {
-      const currentCars = this.carsService.carsL();
+      const currentCars = this.CarList;
       const newCar = this.CarForm.value;
       const carExist = currentCars.find(
-        (car) => car.seriesNumber === this.nmbSeries
+        (car: { seriesNumber: number }) => car.seriesNumber === this.nmbSeries
       );
       if (carExist) {
         newCar.image = this.getImagePath();
-        const updatedCars = currentCars.map((car) => {
-          if (car.seriesNumber === this.nmbSeries) {
-            return newCar;
-          }
-          return car;
-        });
-        this.carsService.carsL.set(updatedCars);
+        this.carsService.UpdateCar(newCar).subscribe();
         this.CarForm.reset();
         this.CarForm.patchValue({ category: '' });
+        this.carSeriesExist = false;
+        this.getCars();
         return;
       } else {
         newCar.image = this.getImagePath();
@@ -123,10 +123,11 @@ export class AdminComponent {
           alert('Modelo existente');
           return;
         }
-        const updatedCars = [...currentCars, newCar];
-        this.carsService.carsL.set(updatedCars);
+        this.carsService.AddCar(newCar).subscribe();
         this.CarForm.reset();
         this.CarForm.patchValue({ category: '' });
+        this.carSeriesExist = false;
+        this.getCars();
       }
     }
   }
@@ -146,10 +147,10 @@ export class AdminComponent {
   }
 
   verifyModel(): boolean {
-    const currentCars = this.carsService.carsL();
+    const currentCars = this.CarList;
     if (
       currentCars.find(
-        (car) =>
+        (car: { model: string }) =>
           car.model.replace(/\s/g, '').toUpperCase() ===
           this.nmModel.replace(/\s/g, '').toUpperCase()
       )
@@ -160,9 +161,11 @@ export class AdminComponent {
   }
 
   verifySeries(): void {
-    const currentCars = this.carsService.carsL();
-    const car = currentCars.find((car) => car.seriesNumber === this.nmbSeries);
+    const car = this.CarList.find(
+      (car: { seriesNumber: number }) => car.seriesNumber === this.nmbSeries
+    );
     if (car) {
+      this.carSeriesExist = true;
       setTimeout(() => {
         this.CarForm.patchValue({
           seriesNumber: this.nmbSeries,
@@ -176,6 +179,22 @@ export class AdminComponent {
           available: car.available,
         });
       });
+    } else {
+      this.carSeriesExist = false;
     }
+  }
+
+  deleteCar(): void {
+    this.carsService.DeleteCar(this.nmbSeries);
+    this.CarForm.reset();
+    this.CarForm.patchValue({ category: '' });
+    this.carSeriesExist = false;
+    this.getCars();
+  }
+
+  getCars(): void {
+    this.carsService.getCars().subscribe((data) => {
+      this.CarList = data;
+    });
   }
 }

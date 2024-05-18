@@ -8,10 +8,15 @@
       <h1>Añadir nuevo modelo</h1>
     </div>
   </div>
+  @if (carSeriesExist) {
+  <button class="del_btn" (click)="deleteCar()">Eliminar</button>
+  }
   <form [formGroup]="CarForm" (ngSubmit)="onSubmit()" class="formContainer">
     <div class="contInput">
       <div class="contLabel-Input">
-        <label class="label-input" for="seriesNumber">N° Serie <span>*</span></label>
+        <label class="label-input" for="seriesNumber"
+          >N° Serie <span>*</span></label
+        >
         <input
           type="number"
           placeholder="Numero de serie"
@@ -35,15 +40,17 @@
     </div>
     <div class="contInput">
       <div class="contLabel-Input">
-        <label class="label-input" for="seriesNumber">Modelo <span>*</span></label>
-      <input
-        type="text"
-        placeholder="Modelo"
-        name="model"
-        formControlName="model"
-        [(ngModel)]="nmModel"
-      />
-    </div>
+        <label class="label-input" for="seriesNumber"
+          >Modelo <span>*</span></label
+        >
+        <input
+          type="text"
+          placeholder="Modelo"
+          name="model"
+          formControlName="model"
+          [(ngModel)]="nmModel"
+        />
+      </div>
       @if(CarForm.get('model')?.dirty){ @if(verifyModel()){
       <p class="error">modelo ya existe</p>
       } } @if(CarForm.get('model')?.touched &&
@@ -59,13 +66,15 @@
     </div>
     <div class="contInput">
       <div class="contLabel-Input">
-        <label class="label-input" for="seriesNumber">Categoria <span>*</span></label>
-      <select name="category" id="category" formControlName="category">
-        <option selected disabled value="" >Selecciona una categoria</option>
-        <option value="Coupé">Coupé</option>
-        <option value="Cabriolet">Cabriolet</option>
-        <option value="SUV">SUV</option>
-      </select>
+        <label class="label-input" for="seriesNumber"
+          >Categoria <span>*</span></label
+        >
+        <select name="category" id="category" formControlName="category">
+          <option selected disabled value="">Selecciona una categoria</option>
+          <option value="Coupé">Coupé</option>
+          <option value="Cabriolet">Cabriolet</option>
+          <option value="SUV">SUV</option>
+        </select>
       </div>
       @if(CarForm.get('category')?.touched &&
       CarForm.get('category')?.hasError('required')){
@@ -74,14 +83,16 @@
     </div>
     <div class="contInput">
       <div class="contLabel-Input">
-        <label class="label-input" for="seriesNumber">Caballos de fuerza <span>*</span></label>
-      <input
-        type="number"
-        placeholder="Caballos de fuerza"
-        name="cv"
-        formControlName="cv"
-        min="0"
-      />
+        <label class="label-input" for="seriesNumber"
+          >Caballos de fuerza <span>*</span></label
+        >
+        <input
+          type="number"
+          placeholder="Caballos de fuerza"
+          name="cv"
+          formControlName="cv"
+          min="0"
+        />
       </div>
       @if(CarForm.get('cv')?.touched &&
       CarForm.get('cv')?.hasError('required')){
@@ -98,14 +109,16 @@
     </div>
     <div class="contInput">
       <div class="contLabel-Input">
-        <label class="label-input" for="seriesNumber">Velocidad máxima <span>*</span></label>
-      <input
-        type="number"
-        placeholder="Velocidad máxima"
-        name="maxSpeed"
-        formControlName="maxSpeed"
-        min="0"
-      />
+        <label class="label-input" for="seriesNumber"
+          >Velocidad máxima <span>*</span></label
+        >
+        <input
+          type="number"
+          placeholder="Velocidad máxima"
+          name="maxSpeed"
+          formControlName="maxSpeed"
+          min="0"
+        />
       </div>
       @if(CarForm.get('maxSpeed')?.touched &&
       CarForm.get('maxSpeed')?.hasError('required')){
@@ -120,14 +133,16 @@
     </div>
     <div class="contInput">
       <div class="contLabel-Input">
-        <label class="label-input" for="seriesNumber">Aceleración 0-100 km/h <span>*</span></label>
-      <input
-        type="number"
-        placeholder="Aceleración de 0 a 100 km/h"
-        name="accelerationTime"
-        formControlName="accelerationTime"
-        min="0"
-      />
+        <label class="label-input" for="seriesNumber"
+          >Aceleración 0-100 km/h <span>*</span></label
+        >
+        <input
+          type="number"
+          placeholder="Aceleración de 0 a 100 km/h"
+          name="accelerationTime"
+          formControlName="accelerationTime"
+          min="0"
+        />
       </div>
       @if(CarForm.get('accelerationTime')?.touched &&
       CarForm.get('accelerationTime')?.hasError('required')){
@@ -139,14 +154,16 @@
     </div>
     <div class="contInput">
       <div class="contLabel-Input">
-        <label class="label-input" for="seriesNumber">Precio <span>*</span></label>
-      <input
-        type="number"
-        placeholder="Precio"
-        name="price"
-        formControlName="price"
-        min="0"
-      />
+        <label class="label-input" for="seriesNumber"
+          >Precio <span>*</span></label
+        >
+        <input
+          type="number"
+          placeholder="Precio"
+          name="price"
+          formControlName="price"
+          min="0"
+        />
       </div>
       @if(CarForm.get('price')?.touched &&
       CarForm.get('price')?.hasError('required')){
@@ -157,8 +174,14 @@
       }
     </div>
     <div class="contInput">
-      <label for="available" class="cyberpunk-checkbox-label">Disponibilidad
-      <input type="checkbox" name="available" formControlName="available" class="cyberpunk-checkbox"/></label>
+      <label for="available" class="cyberpunk-checkbox-label"
+        >Disponibilidad
+        <input
+          type="checkbox"
+          name="available"
+          formControlName="available"
+          class="cyberpunk-checkbox"
+      /></label>
     </div>
     <button type="submit" [disabled]="CarForm.invalid" class="btnSubmit">
       Guardar

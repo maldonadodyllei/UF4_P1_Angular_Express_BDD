@@ -33,6 +33,32 @@
   text-transform: uppercase;
 }
 
+.del_btn{
+  position: absolute;
+  display: flex;
+  right: 24px;
+  margin-top: 1em;
+  background-color: #E74C3C;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .55px;
+  transition: .3s ease-in-out;
+
+  animation: bounce2 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.del_btn:hover {
+  background-color: transparent;
+  color: #E74C3C;
+}
+
 .formContainer {
   height: auto;
   display: flex;

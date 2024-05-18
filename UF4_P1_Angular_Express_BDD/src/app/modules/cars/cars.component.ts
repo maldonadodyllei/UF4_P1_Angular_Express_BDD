@@ -19,18 +19,22 @@ export class CarsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.carList = this.carsService.carsL();
 
-    this.carList.forEach(car => {
-      if (car.category === 'Coupé') {
-        this.areCoupe = true;
-      }
-      if (car.category === 'Cabriolet') {
-        this.areCabrio = true;
-      }
-      if (car.category === 'SUV') {
-        this.areSuv = true;
-      }
+    this.carsService.getCars().subscribe(data => {
+      this.carList = data;
+
+      this.carList.forEach(car => {
+        if (car.category === 'Coupé') {
+          this.areCoupe = true;
+        }
+        if (car.category === 'Cabriolet') {
+          this.areCabrio = true;
+        }
+        if (car.category === 'SUV') {
+          this.areSuv = true;
+        }
+      });
     });
   }
+  
 }
